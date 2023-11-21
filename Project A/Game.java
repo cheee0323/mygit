@@ -4,9 +4,10 @@ public class Game
 {
     private int money = 5000;
     private Items items = new Items();
-    private int mainWeaponsPrice = 0;
+    private int mainWeaponPrice = 0;
     private int secondaryWeaponsPrice = 0;
     private int armorPrice = 0;
+    
     public Game()
     {
         menu();
@@ -29,7 +30,7 @@ public class Game
                     chooseArmor();
                     if ((5000 - money) < ((int)Math.random() * 5000))
                     {
-                           System.out.println("You lose");
+                        System.out.println("You lose");
                     }
                     else
                     {
@@ -44,122 +45,60 @@ public class Game
         action = readUpperChar();
         } 
     }
+    
     private char readUpperChar()
     {
         Scanner in = new Scanner(System.in);
         return in.next().toUpperCase().charAt(0);
     }
+    
     public void chooseMainWeapon()
     {
-        items.listMainWeapons();
         System.out.println("Choose your main weapon");
+        items.listMainWeapons();
         System.out.println("Choose option: 1, 2, 3, 4, 5");
         System.out.println("5 is skip");
         System.out.println("Please enter your choice: ");
         char action = readUpperChar();
+        if (action == '1' || action == '2' || action == '3' || action == '4')
         {
-            switch(action)
-            {
-                case '1':
-                    mainWeaponsPrice = items.getMainWeaponsPrice0();
-                    money -= mainWeaponsPrice;
-                    
-                case '2':
-                    mainWeaponsPrice = items.getMainWeaponsPrice1();
-                    money -= mainWeaponsPrice;
-                    
-                case '3':
-                    mainWeaponsPrice = items.getMainWeaponsPrice2();
-                    money -= mainWeaponsPrice;
-          
-                case '4':
-                    mainWeaponsPrice = items.getMainWeaponsPrice3();
-                    money -= mainWeaponsPrice;
-
-                case '5':
-                    break;
-                default: 
-            }
+            mainWeaponPrice = items.getMainWeaponPrice((int)action);
+            money -= mainWeaponPrice;
+            showCurrentMoney();
         }
-        System.out.println("You have " + money + " left!\n");
+        System.out.println("Skip\n");
+        showCurrentMoney();
     }
 
     public void chooseSecondaryWeapon()
     {
-        items.listSecondaryWeapons();
         System.out.println("Choose your second weapon");
+        items.listSecondaryWeapons();
         System.out.println("Choose option: 1, 2, 3, 4, 5");
         System.out.println("5 is skip");
         System.out.println("Please enter your choice: ");
         char action = readUpperChar();
+        if (action == '5')
+        {   
+            System.out.println("You chose skip\n");
+        }
+        while ((action == '1' || action == '2' || action == '3' || action == '4') )
         {
-            switch(action)
+            secondaryWeaponsPrice = items.getSecondaryWeaponsPrice((int)action);
+            if(money >= secondaryWeaponsPrice)
             {
-                case '1':
-                    secondaryWeaponsPrice = items.getSecondaryWeaponsPrice0();    
-                    if ((money - secondaryWeaponsPrice) >= 0)
-                    {
-                        money -= secondaryWeaponsPrice;
-                        break;
-                    }
-                    else 
-                    {
-                        System.out.println("Not enough money");
-                        System.out.println("You have " + money + " left\n");
-                        chooseSecondaryWeapon();
-                        break;
-                    }
-                    
-                case '2':
-                    secondaryWeaponsPrice = items.getSecondaryWeaponsPrice1();    
-                    if ((money - secondaryWeaponsPrice) >= 0)
-                    {
-                        money -= secondaryWeaponsPrice;
-                        break;
-                    }
-                    else
-                    {
-                        System.out.println("Not enough money");
-                        System.out.println("You have " + money + " left\n");
-                        chooseSecondaryWeapon();
-                        break;
-                    }
-                    
-                case '3':
-                    secondaryWeaponsPrice = items.getSecondaryWeaponsPrice2();    
-                    if ((money - secondaryWeaponsPrice) >= 0)
-                    {
-                        money -= secondaryWeaponsPrice;
-                        break;
-                    }
-                    else
-                    {
-                        System.out.println("Not enough money");
-                        System.out.println("You have " + money + " left\n");
-                        chooseSecondaryWeapon();
-                        break;
-                    }
-                case '4':
-                    secondaryWeaponsPrice = items.getSecondaryWeaponsPrice3();    
-                    if ((money - secondaryWeaponsPrice) >= 0)
-                    {
-                        money -= secondaryWeaponsPrice;
-                        break;
-                    }
-                    else
-                    {
-                        System.out.println("Not enough money");
-                        System.out.println("You have " + money + " left\n");
-                        chooseSecondaryWeapon();
-                        break;
-                    }                    
-                case '5':
-                    break;
-                default: 
+                money -= secondaryWeaponsPrice;
+                showCurrentMoney();
+                break;
+            }
+            else
+            {
+                System.out.println("Not enough money");
+                showCurrentMoney();
+                action = readUpperChar();
             }
         }
-        System.out.println("You have " + money + " left!\n");
-    }    
+    }
     
     public void chooseArmor()
     {
@@ -169,42 +108,30 @@ public class Game
         System.out.println("3 is skip");
         System.out.println("Please enter your choice: ");
         char action = readUpperChar();
+        if (action == '5')
         {
-            switch(action)
-            {
-                case '1':
-                    armorPrice = items.getArmorPrice0();
-                    if ((money - secondaryWeaponsPrice) >= 0)
-                    {
-                        money -= secondaryWeaponsPrice;
-                        break;
-                    }
-                    else
-                    {
-                        System.out.println("Not enough money");
-                        System.out.println("You have " + money + " left\n");
-                        chooseArmor();
-                        break;
-                    }
-                case '2':
-                    armorPrice = items.getArmorPrice1();
-                    if ((money - secondaryWeaponsPrice) >= 0)
-                    {
-                        money -= secondaryWeaponsPrice;
-                        break;
-                    }
-                    else
-                    {
-                        System.out.println("Not enough money");
-                        System.out.println("You have " + money + " left\n");
-                        chooseArmor();
-                        break;
-                    }    
-                case '3':
-                    break;
-                default: 
-            }
-            System.out.println("You have " + money + " left\n");
+            System.out.println("You chose skip\n");
         }
+        while ((action == '1' || action == '2' || action == '3' || action == '4') )
+        {
+            armorPrice = items.getArmorPrice((int)action);
+            if(money >= secondaryWeaponsPrice)
+            {
+                money -= armorPrice;
+                showCurrentMoney();
+                break;
+            }
+            else
+            {
+                System.out.println("Not enough money");
+                showCurrentMoney();
+                action = readUpperChar();
+            }
+        }
+    }
+    
+    public void showCurrentMoney()
+    {
+        System.out.println("You have " + money + " left.");
     }
 }

@@ -20,48 +20,21 @@ public class Items
         armors.add(new Armor("Heavy Shield", 50, Type.SHIELD, 1000));
     }
     
-    public int getMainWeaponsPrice0()
+    public int getMainWeaponPrice(int i)
     {
-        return mainWeapons.get(0).getPrice();
-    }
-    public int getMainWeaponsPrice1()
-    {
-        return mainWeapons.get(1).getPrice();
-    }
-    public int getMainWeaponsPrice2()
-    {
-        return mainWeapons.get(2).getPrice();
-    }
-    public int getMainWeaponsPrice3()
-    {
-        return mainWeapons.get(3).getPrice();
+        return mainWeapons.get(i-49).getPrice();
     }
     
-    public int getSecondaryWeaponsPrice0()
+    public int getSecondaryWeaponsPrice(int i)
     {
-        return secondaryWeapons.get(0).getPrice();
-    }
-    public int getSecondaryWeaponsPrice1()
-    {
-        return secondaryWeapons.get(1).getPrice();
-    }
-    public int getSecondaryWeaponsPrice2()
-    {
-        return secondaryWeapons.get(2).getPrice();
-    }
-    public int getSecondaryWeaponsPrice3()
-    {
-        return secondaryWeapons.get(3).getPrice();
+        return secondaryWeapons.get(i-49).getPrice();
     }
     
-    public int getArmorPrice0()
+    public int getArmorPrice(int i)
     {
-        return armors.get(0).getPrice();
+        return armors.get(i-49).getPrice();
     }
-    public int getArmorPrice1()
-    {
-        return armors.get(1).getPrice();
-    }
+
     public void listMainWeapons()
     {
         for (Item current : mainWeapons)
@@ -69,6 +42,7 @@ public class Items
             System.out.println(current.toString() + "\n");
         }
     }
+    
     public void listSecondaryWeapons()
     {
         for (Item current : secondaryWeapons)
@@ -76,6 +50,7 @@ public class Items
             System.out.println(current.toString() + "\n");
         }
     }
+    
     public void listArmors()
     {
         for (Item current : armors)
