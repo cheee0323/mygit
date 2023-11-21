@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=MainWeapon
+comment1.params=name\ amount\ type\ price
+comment1.target=MainWeapon(java.lang.String,\ int,\ Type,\ int)
+comment2.params=
+comment2.target=java.lang.String\ toString()
+comment3.params=
+comment3.target=java.lang.String\ getName()
+comment4.params=
+comment4.target=int\ getAmount()
+comment5.params=
+comment5.target=Type\ getType()
+comment6.params=
+comment6.target=int\ getPrice()
+comment7.params=
+comment7.target=java.lang.String\ printType()
+numComments=8
