@@ -9,14 +9,15 @@ public class SecondaryWeapon implements Item
     {
         this.name = name;
         this.amount = amount;
+        this.type = type;
         this.price = price;
     }
-    
+
     public String toString()
     {
-        return "Name: " + name + "\nAmmo: " + amount + "\nType: " + type + "\nPrice: " + price;
+        return "Name: " + name + "\nAmmo: " + amount + "\nType: " + printType() + "\nPrice: " + price;
     }
-  
+    
     public String getName()
     {
         return this.name;
@@ -38,8 +39,8 @@ public class SecondaryWeapon implements Item
     }
     
     public String printType()
-    {
-        switch(this.type){
+    {     
+        switch(getType()){
             case SHOTGUN:
                 return "Shotgun";
             case SNIPER:
