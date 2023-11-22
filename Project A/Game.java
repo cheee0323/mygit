@@ -32,12 +32,12 @@ public class Game
                     chooseArmor();
                     if ((5000 - account) < (Math.random() * 5000))
                     {
-                        toString();
+                        System.out.println(toString());
                         System.out.println("You lose");
                     }
                     else
                     {
-                        toString();
+                        System.out.println(toString());
                         System.out.println("You Win");
                     }    
                     break;
