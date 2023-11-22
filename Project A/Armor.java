@@ -8,12 +8,14 @@ public class Armor implements Item
     public Armor(String name, int amount, Type type, int price)
     {
         this.name = name;
+        this.amount = amount;
+        this.type = type;
         this.price = price;
     }
 
     public String toString()
     {
-        return "Name: " + name + "\nType: " + type + "\nPrice: " + price;
+        return "Name: " + name + "\nAmmo: " + amount + "\nType: " + printType() + "\nPrice: " + price;
     }
     
     public String getName()
@@ -37,8 +39,8 @@ public class Armor implements Item
     }
     
     public String printType()
-    {
-        switch(this.type){
+    {     
+        switch(getType()){
             case SHOTGUN:
                 return "Shotgun";
             case SNIPER:
@@ -56,5 +58,5 @@ public class Armor implements Item
             default: 
                 return "";
         }
-    }    
+    }
 }

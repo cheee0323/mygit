@@ -2,10 +2,10 @@ import java.util.*;
 import java.util.LinkedList;
 public class Game
 {
-    private int money = 5000;
+    private int account;
     private Items items = new Items();
     private int mainWeaponPrice = 0;
-    private int secondaryWeaponsPrice = 0;
+    private int secondaryWeaponPrice = 0;
     private int armorPrice = 0;
     
     public Game()
@@ -17,6 +17,7 @@ public class Game
     {
         System.out.println("Choose option: Start, Exit");
         System.out.println("Please enter your choice S, X: ");
+        
         char action = readUpperChar();
         while (action != 'X')
         {
@@ -24,18 +25,21 @@ public class Game
             {
                 case 'S': 
                     System.out.println("Final Round");
-                    System.out.println("\nYou have 5000");
+                    account = 5000;
+                    System.out.println("\nYou have " + account);
                     chooseMainWeapon();
                     chooseSecondaryWeapon();
                     chooseArmor();
-                    if ((5000 - money) < ((int)Math.random() * 5000))
+                    if ((5000 - account) < (Math.random() * 5000))
                     {
+                        toString();
                         System.out.println("You lose");
                     }
                     else
                     {
+                        toString();
                         System.out.println("You Win");
-                    }                 
+                    }    
                     break;
                 case 'X':
                 default:
@@ -63,11 +67,11 @@ public class Game
         if (action == '1' || action == '2' || action == '3' || action == '4')
         {
             mainWeaponPrice = items.getMainWeaponPrice((int)action);
-            money -= mainWeaponPrice;
-            showCurrentMoney();
+            account -= mainWeaponPrice;
+            showCurrentAccount();
         }
         System.out.println("Skip\n");
-        showCurrentMoney();
+        showCurrentAccount();
     }
 
     public void chooseSecondaryWeapon()
@@ -84,17 +88,17 @@ public class Game
         }
         while ((action == '1' || action == '2' || action == '3' || action == '4') )
         {
-            secondaryWeaponsPrice = items.getSecondaryWeaponsPrice((int)action);
-            if(money >= secondaryWeaponsPrice)
+            secondaryWeaponPrice = items.getSecondaryWeaponsPrice((int)action);
+            if(account >= secondaryWeaponPrice)
             {
-                money -= secondaryWeaponsPrice;
-                showCurrentMoney();
+                account -= secondaryWeaponPrice;
+                showCurrentAccount();
                 break;
             }
             else
             {
-                System.out.println("Not enough money");
-                showCurrentMoney();
+                System.out.println("Not enough account");
+                showCurrentAccount();
                 action = readUpperChar();
             }
         }
@@ -108,30 +112,38 @@ public class Game
         System.out.println("3 is skip");
         System.out.println("Please enter your choice: ");
         char action = readUpperChar();
-        if (action == '5')
+        if (action == '3')
         {
             System.out.println("You chose skip\n");
         }
-        while ((action == '1' || action == '2' || action == '3' || action == '4') )
+        while ((action == '1' || action == '2') )
         {
             armorPrice = items.getArmorPrice((int)action);
-            if(money >= secondaryWeaponsPrice)
+            if(account >= secondaryWeaponPrice)
             {
-                money -= armorPrice;
-                showCurrentMoney();
+                account -= armorPrice;
+                showCurrentAccount();
                 break;
             }
             else
             {
-                System.out.println("Not enough money");
-                showCurrentMoney();
+                System.out.println("Not enough account");
+                showCurrentAccount();
                 action = readUpperChar();
             }
         }
     }
     
-    public void showCurrentMoney()
+    public void showCurrentAccount()
     {
-        System.out.println("You have " + money + " left.");
+        System.out.println("You have " + account + " left.");
+    }
+    
+    public String toString()
+    {
+        return "You have " + account + 
+        "\nPirce of main weapon that you chose is " + mainWeaponPrice +
+        "\nPrice of secondary weapon that you chose is " + secondaryWeaponPrice +
+        "\nPrice of armor that you chose is " + armorPrice;  
     }
 }
